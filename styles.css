@@ -479,15 +479,38 @@ body {
 }
 .skills__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 24px;
 }
 .skill-card {
-    padding: 32px;
+    position: relative;
+    padding: 32px 28px;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+.skill-card__badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: rgba(230, 57, 70, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(230, 57, 70, 0.3);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.skill-card__badge--cert {
+    background: rgba(255, 215, 0, 0.12);
+    color: #ffd166;
+    border-color: rgba(255, 209, 102, 0.3);
 }
 .skill-card:hover {
     border-color: var(--accent);

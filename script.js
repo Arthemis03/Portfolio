@@ -133,14 +133,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Image fallback (use hqdefault if maxresdefault fails) ---
+    // --- Image fallback (use hqdefault if maxresdefault fails or returns placeholder) ---
     document.querySelectorAll('.project-card__thumb img').forEach(img => {
+        function checkAndFallback() {
+            if (img.src.includes('maxresdefault') && (img.naturalWidth === 0 || img.naturalWidth === 120)) {
+                img.src = img.src.replace('maxresdefault', 'hqdefault');
+            }
+        }
         img.addEventListener('error', function() {
-            const src = this.src;
-            if (src.includes('maxresdefault')) {
-                this.src = src.replace('maxresdefault', 'hqdefault');
+            if (this.src.includes('maxresdefault')) {
+                this.src = this.src.replace('maxresdefault', 'hqdefault');
             }
         });
+        img.addEventListener('load', checkAndFallback);
+        if (img.complete) {
+            checkAndFallback();
+        }
     });
 
     // --- Fade-in animation keyframe ---
